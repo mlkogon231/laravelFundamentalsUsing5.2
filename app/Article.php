@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 class Article extends Model
 {
-   	protected $fillable = ['title', 'body', 'published_at'];
+   	protected $fillable = ['title', 'body', 'published_at',
+	'user_id' //temporary
+	
+];
 
 	protected $dates = ['published_at'];
 
@@ -17,6 +20,9 @@ class Article extends Model
 	public function setPublishedAtAttribute($date){
 		$this->attributes['published_at'] = Carbon::parse($date);
 	}
-
+// article is owned by a user
+	public function user(){
+		return $this->belongsTo('App\User');
+	}
 
 }
